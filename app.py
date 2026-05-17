@@ -35,10 +35,17 @@ st.sidebar.write("LinkedIn : [anzish-gul-5355aa40b](https://www.linkedin.com/in/
 
 import os
 model = XGBRegressor()
-model.load_model(os.path.join("models", "xgb_model.json"))
 
-features = joblib.load(os.path.join("models", "features.pkl"))
-all_columns = joblib.load(os.path.join("models", "all_columns.pkl"))
+# Check if file exists
+model_path = "models/xgb_model.json"
+if os.path.exists(model_path):
+    model.load_model(model_path)
+else:
+    st.error("Model file not found! Please check GitHub repository.")
+    st.stop()
+
+features = joblib.load("models/features.pkl")
+all_columns = joblib.load("models/all_columns.pkl")
 
 st.write("This dashboard will show you the total consumption of next 7 days")
 
