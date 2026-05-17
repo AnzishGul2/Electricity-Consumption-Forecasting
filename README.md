@@ -9,5 +9,6 @@ Enables utility companies and households to optimiz power generation
 - Framework:Streamlit
 - Deployment: Streamlit Cloud
 ## click here for live demo
+[Click here to view the live app](https://electricity-consumption-forecasting-j2c8xswp3eh7kz6e5cuwg8.streamlit.app)
 Anzish GUL
 CS | AI | ML 
