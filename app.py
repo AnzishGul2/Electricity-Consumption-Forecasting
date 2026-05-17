@@ -33,11 +33,12 @@ st.sidebar.write("Email : [anzishgul2@gmail.com](mailto:anzishgul2@gmail.com)")
 st.sidebar.write("GitHub : [AnzishGul2](https://github.com/AnzishGul2)")
 st.sidebar.write("LinkedIn : [anzish-gul-5355aa40b](https://www.linkedin.com/in/anzish-gul-5355aa40b)")
 
+import os
 model = XGBRegressor()
-model.load_model("models/xgb_model.json")
+model.load_model(os.path.join("models", "xgb_model.json"))
 
-features = joblib.load("models/features.pkl")
-all_columns = joblib.load("models/all_columns.pkl")
+features = joblib.load(os.path.join("models", "features.pkl"))
+all_columns = joblib.load(os.path.join("models", "all_columns.pkl"))
 
 st.write("This dashboard will show you the total consumption of next 7 days")
 
