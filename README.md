@@ -9,5 +9,5 @@ Enables utility companies and households to optimiz power generation
 - Framework:Streamlit
 - Deployment: Streamlit Cloud
 ## click here for live demo
-# Anzish GUL
+Anzish GUL
 CS | AI | ML 
