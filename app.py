@@ -5,7 +5,7 @@ import numpy as np
 from xgboost import XGBRegressor
 
 
-st.set_page_config(page_title="GUL Forecasting", page_icon="⚡", layout="wide")
+st.set_page_config(page_title="⚡ Forecasting", layout="wide")
 
 st.title("Electricity Consumption Forecasting Dashboard")
 
@@ -28,13 +28,10 @@ st.sidebar.write("""
 - MAPE : 3.39%
 """)
 st.sidebar.subheader("Developer")
-st.sidebar.write("""
- - Name : Anzish Gul 
- - Email : anzish.gul@example.com
- - GitHub : github.com/anzishgul
- - LinkedIn : linkedin.com/in/anzishgul
- """)
-
+st.sidebar.write("Name : Anzish Gul")
+st.sidebar.write("Email : [anzishgul2@gmail.com](mailto:anzishgul2@gmail.com)")
+st.sidebar.write("GitHub : [AnzishGul2](https://github.com/AnzishGul2)")
+st.sidebar.write("LinkedIn : [anzish-gul-5355aa40b](https://www.linkedin.com/in/anzish-gul-5355aa40b)")
 
 model = XGBRegressor()
 model.load_model("models/xgb_model.json")
@@ -51,7 +48,7 @@ uploaded_file = st.file_uploader(
 )
 
 
-with st.expander("📋 View Required Data Format (Click to expand)"):
+with st.expander(" View Required Data Format (Click to expand)"):
     st.write("**Option 1: Add only 2 columns (Minimum):**")
     st.write("""
     - Date[Y-m-D]
@@ -140,13 +137,13 @@ if uploaded_file is not None:
     
  
     if 'Global_active_power' not in df.columns:
-        st.error("❌ 'Global_active_power' column is required!")
+        st.error(" 'Global_active_power' column is required!")
         st.stop()
     
   
     if missing_cols_list:
-        st.warning(f"⚠️ Missing columns: {missing_cols_list}. Filled with 0.")
-        st.info("📌 For better accuracy, please provide all columns.")
+        st.warning(f" Missing columns: {missing_cols_list}. Filled with 0.")
+        st.info(" For better accuracy, please provide all columns.")
     
 
     st.write("### Uploaded Data Preview")
@@ -174,7 +171,7 @@ if uploaded_file is not None:
     st.success("Forecast generated successfully")
 
     st.metric(
-        label="⚡ Next Week Total Consumption",
+        label=" Next Week Total Consumption",
         value=f"{total_prediction:.2f} kW",
         delta=f"~{total_prediction/7:.2f} kW per day"
     )
@@ -182,7 +179,7 @@ if uploaded_file is not None:
     st.markdown("---")
     
  
-    st.subheader("📊 Daily Consumption Forecast")
+    st.subheader(" Daily Consumption Forecast")
     
     col1, col2 = st.columns(2)
     
@@ -202,7 +199,7 @@ if uploaded_file is not None:
         st.line_chart(chart_df_line.set_index("Day"), use_container_width=True)
     
 
-    st.subheader("📈 Cumulative Consumption")
+    st.subheader(" Cumulative Consumption")
     cumulative = np.cumsum(preds)
     cum_df = pd.DataFrame({
         "Day": range(1, len(preds) + 1),
@@ -211,7 +208,7 @@ if uploaded_file is not None:
     st.area_chart(cum_df.set_index("Day"), use_container_width=True)
     
   
-    st.subheader("📉 Last Week Consumption Pattern")
+    st.subheader(" Last Week Consumption Pattern")
     if len(df) >= 7:
         historical = df['Global_active_power'].iloc[-7:].values
         hist_df = pd.DataFrame({
@@ -221,7 +218,7 @@ if uploaded_file is not None:
         st.line_chart(hist_df.set_index("Day"), use_container_width=True)
     
 
-    st.subheader("🔄 Week-over-Week Comparison")
+    st.subheader(" Week-over-Week Comparison")
     if len(df) >= 7:
         last_week_avg = df['Global_active_power'].iloc[-7:].mean()
         next_week_avg = total_prediction / 7
@@ -234,12 +231,12 @@ if uploaded_file is not None:
         
         change = ((next_week_avg - last_week_avg) / last_week_avg) * 100
         if change > 0:
-            st.info(f"📈 Expected increase of {change:.1f}% compared to last week")
+            st.info(f" Expected increase of {change:.1f}% compared to last week")
         else:
-            st.info(f"📉 Expected decrease of {abs(change):.1f}% compared to last week")
+            st.info(f" Expected decrease of {abs(change):.1f}% compared to last week")
     
   
-    st.subheader("📊 Prediction Distribution")
+    st.subheader(" Prediction Distribution")
     dist_df = pd.DataFrame({
         "Value": preds.round(2)
     })
@@ -247,7 +244,7 @@ if uploaded_file is not None:
     
 
     st.markdown("---")
-    st.subheader("📥 Download Results")
+    st.subheader(" Download Results")
     
     result_df = pd.DataFrame({
         "Day": range(1, len(preds) + 1),
@@ -257,7 +254,7 @@ if uploaded_file is not None:
     
     csv_result = result_df.to_csv(index=False)
     st.download_button(
-        label="📥 Download Forecast as CSV",
+        label=" Download Forecast as CSV",
         data=csv_result,
         file_name="electricity_forecast.csv",
         mime="text/csv"
